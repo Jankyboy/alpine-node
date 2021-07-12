@@ -1,7 +1,7 @@
 Minimal Node.js Docker Images
 -----------------------------
 
-Versions v14.11.0, v12.18.4, v10.22.1, v8.17.0, v6.17.1, v4.9.1, v0.12.18 and v0.10.48 –
+Versions v16.4.2, v14.17.3, v12.22.3, v10.24.1, v8.17.0, v6.17.1, v4.9.1, v0.12.18 and v0.10.48 –
 built on [Alpine Linux](https://alpinelinux.org/).
 
 All versions use the one [mhart/alpine-node](https://hub.docker.com/r/mhart/alpine-node/) repository,
@@ -9,19 +9,21 @@ but each version aligns with the following tags (ie, `mhart/alpine-node:<tag>`).
 *unpacked* images as reported by Docker – compressed sizes are about 1/3 of these:
 
 - Full install built with npm and yarn:
-  - `latest`, `14`, `14.11`, `14.11.0` – 109 MB (npm 6.14.8, yarn 1.22.5)
-  - `12`, `12.18`, `12.18.4` – 81.1 MB (npm 6.14.8, yarn 1.22.5)
-  - `10`, `10.22`, `10.22.1` – 74.4 MB (npm 6.14.8, yarn 1.22.5)
-  - `8`, `8.17`, `8.17.0` – 68.7 MB (npm 6.14.8, yarn 1.22.4)
+  - `latest`, `16`, `16.4`, `16.4.2` – 108 MB (npm 7.19.1, yarn 1.22.10)
+  - `14`, `14.17`, `14.17.3` – 109 MB (npm 6.14.13, yarn 1.22.10)
+  - `12`, `12.22`, `12.22.3` – 80.4 MB (npm 6.14.13, yarn 1.22.10)
+  - `10`, `10.24`, `10.24.1` – 73.1 MB (npm 6.14.12, yarn 1.22.10)
+  - `8`, `8.17`, `8.17.0` – 67.8 MB (npm 6.14.11, yarn 1.22.10)
 - Full install build with npm:
   - `6`, `6.17`, `6.17.1` – 49 MB (npm 3.10.10)
   - `4`, `4.9`, `4.9.1` – 35.2 MB (npm 2.15.12)
   - `0.12`, `0.12.18` – 32.4 MB (npm 2.15.12)
   - `0.10`, `0.10.48` – 27.8 MB (npm 2.15.12)
 - Slim install with no npm or yarn:
-  - `slim`, `slim-14`, `slim-14.11`, `slim-14.11.0` – 73.3 MB
-  - `slim-12`, `slim-12.18`, `slim-12.18.4` – 46.7 MB
-  - `slim-10`, `slim-10.22`, `slim-10.22.1` – 42 MB
+  - `slim`, `slim-16`, `slim-16.4`, `slim-16.4.2` – 78.1 MB
+  - `slim-14`, `slim-14.17`, `slim-14.17.3` – 73.9 MB
+  - `slim-12`, `slim-12.22`, `slim-12.22.3` – 46.9 MB
+  - `slim-10`, `slim-10.24`, `slim-10.24.1` – 41.3 MB
   - `slim-8`, `slim-8.17`, `slim-8.17.0` – 37.2 MB
   - `slim-6`, `slim-6.17`, `slim-6.17.1` – 32.5 MB
 
@@ -30,25 +32,22 @@ Examples
 
 ```console
 $ docker run --rm mhart/alpine-node:14 node --version
-v14.11.0
+v14.17.3
 
 $ docker run --rm mhart/alpine-node:12 node --version
-v12.18.4
+v12.22.3
 
-$ docker run --rm mhart/alpine-node:10 node --version
-v10.22.1
+$ docker run --rm mhart/alpine-node:14 npm --version
+6.14.13
 
-$ docker run --rm mhart/alpine-node:12 npm --version
-6.14.8
-
-$ docker run --rm mhart/alpine-node:12 yarn --version
-1.22.5
+$ docker run --rm mhart/alpine-node:14 yarn --version
+1.22.10
 
 $ docker run --rm mhart/alpine-node:slim-14 node --version
-v14.11.0
+v14.17.3
 
 $ docker run --rm mhart/alpine-node:slim-12 node --version
-v12.18.4
+v12.22.3
 ```
 
 Example Dockerfile for your own Node.js project
@@ -69,7 +68,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # If you have native dependencies, you'll need extra tools
-# RUN apk add --no-cache make gcc g++ python
+# RUN apk add --no-cache make gcc g++ python3
 
 RUN npm ci --prod
 
@@ -102,7 +101,7 @@ WORKDIR /app
 COPY . .
 
 # If you have native dependencies, you'll need extra tools
-# RUN apk add --no-cache make gcc g++ python
+# RUN apk add --no-cache make gcc g++ python3
 
 RUN npm ci --prod
 
